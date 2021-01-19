@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.light_blue-blue.min.css" />
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <title>Cadastro de Funcionários</title>
+    <style>
+        
+        #cepvalido {
+            margin-top: 20px;
+        }
+
+        #rua {
+            
+            margin-top: 20px;
+       
+        }
+
+        #bairro {
+            margin-top: 20px;
+        }
+
+        #cidade {
+            margin-top: 20px;
+        }
+
+        #estado {
+            margin-top: 20px;
+        }
+
+        #comp {
+            margin-top: 20px;
+        }
+        
+        #numero {
+            margin-top: 20px;
+        }
+
+        
+    </style>
+</head>
+<body>
+     <!-- header -->
+
+     <div class="mdl-layout mdl-js-layout">
+        <header class="mdl-layout__header mdl-layout__header--scroll">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <a href="#">
+                    <img style="cursor: pointer;"
+                        src="Img\capybara-banner.png" width="115px">
+                </a>
+            </div>
+        </header>
+        
+        <!-- main -->
+
+        <div id="corpo" style="width: 600px; margin: auto; margin-top: 20px; margin-bottom: 10px;" align="center">
+
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; margin: auto; display: flex;">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text" id="titulo">Digite os Dados do Funcionário.</h2>
+                </div>
+
+
+                <div class="mdl-card__supporting-text">
+                    <form action="#" id="formuser">
+                        <div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input id="Nome" class="mdl-textfield__input" type="text" required>
+                                <label class="mdl-textfield__label" for="sample3">Nome do Funcionário...</label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="RegraValida" value=""
+                                    name="RegraValida" onkeydown="javascript: fMasc( this, mCPF );"
+                                    onfocusout="ValidaCPF()" maxlength="14" required>
+                                <label class="mdl-textfield__label" for="sample2">CPF do Funcionário...</label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="rgvalido" name="rgvalido" value=""
+                                    onkeypress="mascara (this, '##.###.###-#')" maxlength="12" onfocusout="validarrg()" required>
+                                <label class="mdl-textfield__label" for="sample2">RG do Funcionário...</label>
+                            </div>
+                        </div>
+
+                        <div
+                            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                            <input style="width: 308px; transform: translateX(-28px);" class="mdl-textfield__input"
+                                type="date" id="date" required>
+                        </div>
+
+                        <div class="mySelec">
+                            <select id="cnh" class="mdl-textfield__input"
+                                style="width: 308px; margin-bottom: 40px; color: rgba(128, 128, 128, 0.5);" required>
+                                <option value="" disabled selected style="color: rgba(128, 128, 128, 0.4);">Selecione o
+                                    tipo de habilitação</option>
+                                <option value="Tipo A" class="black">Tipo A</option>
+                                <option value="Tipo B" class="black">Tipo B</option>
+                                <option value="Tipo C" class="black">Tipo C</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <select id="cnh" class="mdl-textfield__input"
+                                style="width: 308px; margin-bottom: 20px; color: rgba(128, 128, 128, 0.5);" required>
+                                <option value="" disabled selected style="color: rgba(128, 128, 128, 0.4);">Selecione o
+                                    Estado Cívil</option>
+                                <option value="Solteiro(a)" class="black">Solteiro(a)</option>
+                                <option value="Casado(a)" class="black">Casado(a)</option>
+                                <option value="Viuvo(a)" class="black">Viuvo(a)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" id="cepvalido" value="" name="cepvalido" type="text"
+                                    onkeypress="mascara(this, '#####-###')" maxlength="9"
+                                    onchange="getDadosEnderecoCEP(this.value); validarcep(); fillComp()" onfocusout="endCampos()" required>
+                                <label class="mdl-textfield__label" for="sample2">Digite o CEP...</label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="rua" oninput="endCampos()">
+                                <label class="mdl-textfield__label" for="sample3">Digite a Rua...</label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="bairro">
+                                <label class="mdl-textfield__label" for="sample3">Digite o Bairro...</label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="cidade">
+                                <label class="mdl-textfield__label" placeholder="Pindamonhangaba" for="sample3">Digite a Cidade...</label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="estado">
+                                <label class="mdl-textfield__label" for="sample3">Digite o estado...</label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="numero" required>
+                                <label class="mdl-textfield__label" for="sample3">Digite o numero da Casa...</label>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; width: 250px;">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="comp"
+                                    style="width: 308px; transform: translateX(-30px);">
+                                <label class="mdl-textfield__label" for="sample3" style="transform: translateX(-25px);">Digite o Complemento...</label>
+                            </div>
+                        </div>
+
+                        <div id="next">
+                            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+                                id="buttonsave" onclick="validaEnd()">
+                                <i class="material-icons">arrow_forward</i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+
+    
+</body>
+
+</html>
+
